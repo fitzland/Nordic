@@ -9,11 +9,11 @@ TextField {
     font.pointSize: config.fontSize
     font.family: config.font
     background: Rectangle {
-        color: "#2e3440"
-        radius: parent.width / 2
-        height: 30
+        color: "#373e4c"
+        border.color: parent.focus ? config.selected_color : "#373e4c"
+        radius: 10
         width: parent.width
-        opacity: 0.7
+        height: width / 9
         anchors.centerIn: parent
     }
 }
