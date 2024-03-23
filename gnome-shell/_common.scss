@@ -119,7 +119,7 @@ $slider_size: 19px;
   border-radius: 16px;
   // slider trough
   -barlevel-height: 19px;
-  -barlevel-background-color: transparentize($fg_color, 0.6); //background of the trough
+  -barlevel-background-color: lighten($base_color, 8%); //background of the trough
   -barlevel-border-width: 2px; 
   -barlevel-border-color: transparent; // trough border color
   // fill style
@@ -187,7 +187,12 @@ $slider_size: 19px;
   background-color: darken($osd_bg_color,5%);
   box-shadow: $depth6;
 
-  .modal-dialog-content-box { padding: 24px; }
+  .modal-dialog-content-box {
+    margin: 32px 40px;
+    spacing: 32px;
+    max-width: 28em;
+  }
+
   .run-dialog-entry {
     width: 20em;
     margin-bottom: 6px;
@@ -243,7 +248,6 @@ $slider_size: 19px;
 
 /* End Session Dialog */
 .end-session-dialog {
-  spacing: 42px;
   border: none;
   & .modal-dialog-linked-button:last-child {
     background: $error_color;
@@ -388,7 +392,7 @@ $slider_size: 19px;
 
 .prompt-dialog {
   //this is the width of the entire modal popup
-  width: 34em;
+  width: 28em;
   border: none;
   border-radius: 10px;
 
@@ -540,7 +544,8 @@ $slider_size: 19px;
   .popup-menu-item {
     border-radius: 0;
     margin: 0;
-
+    background-color: lighten($bg_color, 4%);
+    
     &:last-child {
       border-radius: 0 0 6px 6px;
     }
@@ -564,6 +569,7 @@ $slider_size: 19px;
   spacing: 6px;
   border-radius: 6px;
   background-gradient-direction: none;
+  color: $fg_color !important;
 
   &:ltr {padding-left: 6px;}
   &:rtl {padding-right: 6px;}
@@ -1026,7 +1032,7 @@ $slider_size: 19px;
         color:darken($fg_color, 7%);
       }
 
-    .calendar-day-base {
+    .calendar-day-base, .calendar-day {
       font-size: 80%;
       text-align: center;
       width: 2.4em; height: 2.4em;
@@ -1044,7 +1050,7 @@ $slider_size: 19px;
         color: lighten($selected_fg_color,5%);
         background-color: $selected_bg_color;
         border-color: transparent; //avoid jumparound due to today
-        box-shadow: none;
+        box-shadow: inset 0 0 0 2px transparentize($selected_bg_color, 0.4) !important;
       }
       &.calendar-day-heading {  //day of week heading
         color: $fg_color;
@@ -1107,9 +1113,10 @@ $slider_size: 19px;
       /* Message list */
       .message-list {
         border-color: lighten($base_color, 4%);
-        .message-title, .message-content, .message-body {
-          color: darken($fg_color, 5%);
-        }
+      }
+
+      .message-title, .message-content, .message-body {
+        color: darken($fg_color, 5%);
       }
 
         .message-list-sections {
@@ -1138,13 +1145,13 @@ $slider_size: 19px;
 
         .message {
           &:hover,&:focus { 
-            background-color: lighten($bg_color, 3%);
+            background-color: lighten($bg_color, 4%);
             box-shadow: 3px 0px 0px 0px $selected_bg_color inset;
             border-radius: 1px 7px 7px 1px;
            }
-          border: 1px solid $borders_color;
+          border: none;
           border-radius: 7px;
-          background: lighten($bg_color, 1%);
+          background: lighten($bg_color, 2%);
           box-shadow: none;
         }
 
@@ -1179,7 +1186,7 @@ $slider_size: 19px;
             border-radius: 99px;
 
             &:hover {
-              background-color: transparentize($red, 0.7);
+              background-color: transparentize($red, 0.1);
                > StIcon { color: $selected_fg_color; }
             }
             &:active {
@@ -1585,11 +1592,11 @@ $slider_size: 19px;
 }
 
 .app-well-app-running-dot { //running apps indicator
-  width: 4px; height: 4px;
-  background-color: $selected_bg_color;
-  border-radius: 10px !important;
-  box-shadow: 0px 0px 5px 4px transparentize($selected_bg_color,0.2);
-  margin-bottom: 0px;
+  width: 5px; height: 5px;
+  background-color: #8fbcbb;
+  border-radius: 5px !important;
+  box-shadow: 0px 0px 5px 4px $selected_bg_color;
+  margin-bottom: 0px !important;
 }
 
 %icon_tile {
@@ -1599,17 +1606,20 @@ $slider_size: 19px;
   transition-duration: 100ms;
   text-align: center;
   box-shadow: none;
+  border-radius: 18px;
 }
 
 /* App Folders */
 .app-well-app.app-folder {
   background-color: lighten($bg_color, 7%);
-  border-radius: 12px;
+  border-radius: 18px;
 }
 // expanded folder
 .app-folder-dialog { //style like the dash
   background-color:  darken($osd_bg_color,5%);
   border: none;
+  box-shadow: none;
+  border-radius: 30px;
   .edit-folder-button {
     @extend %button;
 
@@ -1705,6 +1715,20 @@ $slider_size: 19px;
     // horizontal padding to make sure scrollbars or dash don't overlap content
     padding: 0px 88px 10px 88px;
   }
+
+.page-navigation-arrow {
+
+  margin: 6px;
+  padding: 18px;
+  width: 24px;
+  height: 24px;
+  border-radius: 99px;
+  
+
+  &:insensitive { @include button(undecorated, $osd_fg_color, transparentize($osd_bg_color, 0.5));}
+  &:hover { background-color: transparentize($selected_bg_color, 0.5);}
+  &:active {background-color: $selected_bg_color;}
+}
 
 %overview-panel {
   color:  $_bubble_fg_color;
@@ -2214,6 +2238,7 @@ $slider_size: 19px;
   border-radius: 12px;
 
   .icon-button, .button {
+    color: $fg_color;
     padding: 6px*1.75;
   }
 }
@@ -2222,12 +2247,14 @@ $base_padding: 6px;
 
 .quick-toggle {
   border-radius: 99px;
-  min-height: 40px;
 
-  &:checked { @include button(active, transparentize($selected_bg_color, 0.3));
-    color: $selected_fg_color;
-  
+  &:checked { 
+    @include button(active, transparentize($selected_bg_color, 0.4));
+    &:hover { @include button(active, transparentize(lighten($selected_bg_color, 8%), 0.4)); }
+    &, &:hover { color: $selected_fg_color; }
   }
+
+  &, &:hover, &:checked, &:checked:hover { border: none; }
 
   & > StBoxLayout { spacing: $base_padding; }
 
@@ -2246,9 +2273,35 @@ $base_padding: 6px;
   &:ltr > StBoxLayout { padding-right: 0; }
   &:rtl > StBoxLayout { padding-left: 0; }
 
+  & .quick-toggle {
+    min-width: auto;
+    max-width: auto;
+
+    &:ltr { border-radius: 99px 0 0 99px; }
+    &:rtl { border-radius: 0 99px 99px 0; }
+
+    &:ltr:last-child { border-radius: 99px; }
+    &:rtl:last-child { border-radius: 99px; }
+  }
+
+
   & .quick-toggle-arrow {
-    background-color: transparentize($fg_color, 0.9);
+    background-color: lighten($base_color, 1%);
     padding: $base_padding $base_padding*1.75;
+    border-width: 0;
+    color: $fg_color;
+    &:checked { 
+      @include button(active, transparentize($selected_bg_color, 0.1));
+      &:hover { @include button(active, transparentize(lighten($selected_bg_color, 5%), 0.1)); }
+      &, &:hover {
+        color: $selected_fg_color;
+        border-width: 0;
+      }
+    }
+    &:hover {
+      background-color: lighten($base_color, 5%);
+    }
+  
 
     &:ltr { border-radius: 0 99px 99px 0; }
     &:rtl { border-radius: 99px 0 0 99px; }
@@ -2256,10 +2309,11 @@ $base_padding: 6px;
 }
 
 .quick-toggle-menu {
-  background-color: $base_color;
+  background-color: $base_color !important;
   border-radius: 12px;
   padding: $base_padding*2;
   margin: $base_padding*2 $base_padding*3 0;
+  color: $fg_color;
 
   .popup-menu-item > StIcon { -st-icon-style: symbolic; }
 
@@ -2274,7 +2328,10 @@ $base_padding: 6px;
       padding: 1.5 * $base_padding;
       background-color: lighten($bg_color, 10%);
 
-      &.active { background-color: $selected_bg_color; }
+      &.active { 
+        background-color: $selected_bg_color; 
+        color: $selected_fg_color;
+      }
     }
 
   }

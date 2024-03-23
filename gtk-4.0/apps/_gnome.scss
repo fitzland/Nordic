@@ -47,13 +47,7 @@
       }
     }
   }
-  &.background {
-    background-color: transparentize(darken($base_color,3%),0.05);
-    &:backdrop {
-      background-color: transparentize(darken($base_color,3%),0.05);
-    }
-  }
-
+  
    // Gnome 43 path-bar
   #NautilusPathBar {
     height: 20px;
@@ -123,11 +117,13 @@
     }
   
     > menubutton > button {
-      min-width: 16px;
-      min-height: 16px;
-      margin: 0;
+      @include button(undecorated);
+      margin-right: -7px;
       -gtk-icon-size: 12px;
       padding: 0 4px;
+      &:hover, &:active, &:focus, &:checked {
+        image { color: #fff; }
+      }
     }
   
     > text, > image { margin: 0; }
