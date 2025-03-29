@@ -41,9 +41,10 @@
       background-color: lighten($panel_bg_color, 10%);
     }
     &:active, &:checked {
-      color: $selected_fg_color;
+      color: $panel_fg_color;
       border: none;
-      background-color: $selected_bg_color;
+      background-color: transparentize($selected_bg_color, 0.9);
+      box-shadow: 0px -2px $selected_bg_color inset;
 
       label, image { color: inherit; }
     }
@@ -68,4 +69,21 @@
 .-vala-panel-appmenu-private > menuitem,
 .-vala-panel-appmenu-private > menuitem:first-child > label {
     color: $panel_fg_color;
+}
+
+// Notifications style
+
+#XfceNotifyWindow {
+  background-color: darken($bg_color, 2%);
+  border-radius: 12px;
+  border-width: 1px;
+  border: 1px solid $borders_color;
+  color: $fg_color;
+  padding: 40px;
+  &:hover, &:focus { background-color: $bg_color; }
+  label, image { color: $fg_color; }
+  button { 
+    @include button(normal); 
+    &:hover {@include button(hover-header, transparentize($selected_bg_color, 0.2));}
+  }
 }

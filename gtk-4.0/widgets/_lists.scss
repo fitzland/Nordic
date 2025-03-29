@@ -45,7 +45,11 @@ row {
 
       &:backdrop { background-color: $backdrop_selected_bg_color; }
     }
+
+    &.button { @include button(normal); }
   }
+
+  .view { background-color: transparent; }
 
   &:selected { @extend %selected_items; }
 }
@@ -145,3 +149,6 @@ columnview.complex {
     }
   }
 }
+
+
+.boxed-list-separate { background-color: transparent; }
